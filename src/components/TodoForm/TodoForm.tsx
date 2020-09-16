@@ -17,6 +17,9 @@ export function TodoForm(props: any) {
   return (
     <div className="todo-form-container">
       <Card className="todo-form-card">
+        <Card.Header>
+          <h2>Todo Form</h2>
+        </Card.Header>
         <Card.Body>
           <Form
             id="todoForm"
@@ -62,7 +65,7 @@ export function TodoForm(props: any) {
             <div className="todo-form-btn-container">
               <Button
                 className="submit-form-btn"
-                variant="primary"
+                variant="success"
                 type="submit"
                 form="todoForm"
               >

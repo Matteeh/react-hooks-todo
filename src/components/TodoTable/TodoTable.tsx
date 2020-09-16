@@ -1,11 +1,13 @@
 import React from "react";
 import "./TodoTable.css";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import Table from "react-bootstrap/esm/Table";
 import { Todo } from "../../models/Todo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faUserClock } from "@fortawesome/free-solid-svg-icons";
 
 export function TodoTable(props: any) {
-  const { todos } = props;
+  const { todos, onEdit, onDelete } = props;
 
   const getTodos = (todos: Todo[]) => {
     if (!todos) {
@@ -22,7 +24,17 @@ export function TodoTable(props: any) {
         <tr key={todo.id}>
           <td>{todo.name}</td>
           <td>{todo.description}</td>
-          <td>{todo.isComplete}</td>
+          <td>
+            <FontAwesomeIcon icon={todo.isComplete ? faCheck : faUserClock} />
+          </td>
+          <td>
+            <Button onClick={() => onEdit(todo)}>Edit</Button>
+          </td>
+          <td>
+            <Button onClick={() => onDelete(todo)} variant="danger">
+              Delete
+            </Button>
+          </td>
         </tr>
       );
     });
@@ -31,12 +43,17 @@ export function TodoTable(props: any) {
   return (
     <div className="todo-table-container">
       <Card>
-        <Table striped bordered hover>
+        <Card.Header>
+          <h2>Todo Table</h2>
+        </Card.Header>
+        <Table striped bordered hover style={{ textAlign: "center" }}>
           <thead>
             <tr>
               <th>Name</th>
               <th>Description</th>
-              <th>IsComplete</th>
+              <th>Is Complete</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>{getTodos(todos)}</tbody>

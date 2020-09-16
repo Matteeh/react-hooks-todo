@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import TodoForm from "../TodoForm";
 import TodoTable from "../TodoTable";
+import ConfirmationModal from "../ConfirmationModal";
 import { http } from "../../helpers/http";
+import { Todo } from "../../models/Todo";
 
 const URL = "https://cosmostodosmicroservice.azurewebsites.net/api";
 
 export function Home(props: any) {
   const [todos, setTodos] = useState([] as any);
+  const [editTodo, setEditTodo] = useState({});
+  const [deleteTodo, setDeleteTodo] = useState({ name: "" });
+  const [displayConfirmationModal, setdisplayConfirmationModal] = useState(
+    false
+  );
 
   useEffect(() => {
     getTodos();
@@ -16,6 +23,18 @@ export function Home(props: any) {
   const getTodos = () => {
     http.get(`${URL}/items`).then((newTodos: any[]) => setTodos([...newTodos]));
   };
+
+  const handleOnDeleteClick = (todo: Todo) => {
+    setdisplayConfirmationModal(true);
+    setDeleteTodo(todo);
+    console.log("table delete clicked", displayConfirmationModal);
+  };
+
+  const handleOnConfirmDeleteClick = () => {
+    // Do request here
+  };
+
+  const handleOnEditClick = (todo: Todo) => {};
 
   /**
    * Handle Sign In Submit
@@ -43,7 +62,18 @@ export function Home(props: any) {
       <br />
       <TodoForm onSubmit={handleTodoFormSubmit} />
       <br />
-      <TodoTable todos={todos} />
+      <TodoTable
+        onEdit={handleOnEditClick}
+        onDelete={handleOnDeleteClick}
+        todos={todos}
+      />
+      <ConfirmationModal
+        onDeleteClick={handleOnConfirmDeleteClick}
+        show={displayConfirmationModal}
+        onHide={() => setdisplayConfirmationModal(false)}
+        title={`${deleteTodo.name}`}
+        message={`Are you sure you want to delete ${deleteTodo.name}`}
+      />
     </div>
   );
 }
