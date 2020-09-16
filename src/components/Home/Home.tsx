@@ -10,7 +10,12 @@ const URL = "https://cosmostodosmicroservice.azurewebsites.net/api";
 export function Home(props: any) {
   const [todos, setTodos] = useState([] as any);
   const [editTodo, setEditTodo] = useState({});
-  const [deleteTodo, setDeleteTodo] = useState({ name: "" });
+  const [deleteTodo, setDeleteTodo] = useState({
+    id: "",
+    name: "",
+    description: "",
+    isComplete: false,
+  } as Todo);
   const [displayConfirmationModal, setdisplayConfirmationModal] = useState(
     false
   );
@@ -31,7 +36,18 @@ export function Home(props: any) {
   };
 
   const handleOnConfirmDeleteClick = () => {
-    // Do request here
+    http.del(`${URL}/items/${deleteTodo.id}`).then((res) => {
+      setTodos((prevTodos: Todo[]) =>
+        prevTodos.filter((t: Todo) => t.id !== deleteTodo.id)
+      );
+      setDeleteTodo({
+        id: "",
+        name: "",
+        description: "",
+        isComplete: false,
+      });
+      setdisplayConfirmationModal(false);
+    });
   };
 
   const handleOnEditClick = (todo: Todo) => {};
