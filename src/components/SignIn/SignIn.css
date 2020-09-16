@@ -1,0 +1,29 @@
+.sign-in-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #282c34;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sign-in-card {
+  height: 320px;
+  width: 320px;
+  align-self: center;
+}
+
+.sign-in-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-button {
+  width: 160px;
+}
+
+.footer {
+  text-align: center;
+}

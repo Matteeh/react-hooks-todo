@@ -1,0 +1,29 @@
+.sign-up-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #282c34;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sign-up-card {
+  height: 320px;
+  width: 320px;
+  align-self: center;
+}
+
+.sign-up-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-up-button {
+  width: 160px;
+}
+
+.footer {
+  text-align: center;
+}
