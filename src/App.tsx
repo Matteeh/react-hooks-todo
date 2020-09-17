@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { http } from "./helpers/http";
 import PrivateRoute from "./components/PrivateRoute";
@@ -23,15 +18,18 @@ function App() {
     if (window.localStorage.getItem("accessToken")) {
       const token = window.localStorage.getItem("accessToken") || "";
       const decoded: any = jwt_decode(token);
-      setEmailAndIdInLocalStorage(decoded.sub, decoded.Email);
-      console.log(decoded);
+      setLocalStorageItems(decoded.sub, decoded.Email);
       setToken(true);
       history.push("/");
     }
-    console.log("I RUN", tokenIsSet);
   });
 
-  const setEmailAndIdInLocalStorage = (userId: string, email: string) => {
+  /**
+   * Set userId and email in localstorage
+   * @param userId
+   * @param email
+   */
+  const setLocalStorageItems = (userId: string, email: string) => {
     window.localStorage.setItem("userId", userId);
     window.localStorage.setItem("email", email);
   };
