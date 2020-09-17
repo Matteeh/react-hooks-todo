@@ -18,7 +18,7 @@ export function TodoForm(props: any) {
     <div className="todo-form-container">
       <Card className="todo-form-card">
         <Card.Header>
-          <h2>Todo Form</h2>
+          <h2>Create Todo</h2>
         </Card.Header>
         <Card.Body>
           <Form

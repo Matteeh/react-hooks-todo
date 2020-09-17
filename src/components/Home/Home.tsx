@@ -15,7 +15,7 @@ export function Home(props: any) {
     id: "",
     name: "",
     description: "",
-    isComplete: false,
+    completed: false,
   } as Todo);
   const [displayConfirmationModal, setdisplayConfirmationModal] = useState(
     false
@@ -47,7 +47,7 @@ export function Home(props: any) {
           id: "",
           name: "",
           description: "",
-          isComplete: false,
+          completed: false,
         });
         setdisplayConfirmationModal(false);
       })
@@ -57,7 +57,7 @@ export function Home(props: any) {
           id: "",
           name: "",
           description: "",
-          isComplete: false,
+          completed: false,
         });
         setdisplayConfirmationModal(false);
       });
@@ -74,11 +74,13 @@ export function Home(props: any) {
     enteredDescription: string,
     enteredIsComplete: boolean
   ) => {
+    console.log(enteredIsComplete, "isComplete");
     http
       .put(`${URL}/items/${editTodo.id}`, {
+        id: editTodo.id,
         name: enteredName,
         description: enteredDescription,
-        enteredIsComplete,
+        completed: enteredIsComplete,
       })
       .then((todo) => {
         setDisplayEditTodoModal(false);

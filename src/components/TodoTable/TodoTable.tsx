@@ -25,7 +25,7 @@ export function TodoTable(props: any) {
           <td>{todo.name}</td>
           <td>{todo.description}</td>
           <td>
-            <FontAwesomeIcon icon={todo.isComplete ? faCheck : faUserClock} />
+            <FontAwesomeIcon icon={todo.completed ? faCheck : faUserClock} />
           </td>
           <td>
             <Button onClick={() => onEdit(todo)}>Edit</Button>
@@ -44,7 +44,7 @@ export function TodoTable(props: any) {
     <div className="todo-table-container">
       <Card>
         <Card.Header>
-          <h2>Todo Table</h2>
+          <h2>Todos</h2>
         </Card.Header>
         <Table striped bordered hover style={{ textAlign: "center" }}>
           <thead>
