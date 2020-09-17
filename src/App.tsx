@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { http } from "./helpers/http";
-import { PrivateRoute } from "./components/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";

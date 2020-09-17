@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 export function PrivateRoute(props: any) {
   const { children, authenticated, ...rest } = props;
