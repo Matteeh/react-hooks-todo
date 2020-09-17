@@ -86,6 +86,10 @@ export function Home(props: any) {
         completed: enteredIsComplete,
       })
       .then((todo) => {
+        setTodos([
+          ...todos.filter((todo: Todo) => todo.id !== editTodo.id),
+          todo,
+        ]);
         setDisplayEditTodoModal(false);
         setEditTodo({} as Todo);
         console.log(todo);
