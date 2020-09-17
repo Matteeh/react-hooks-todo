@@ -7,20 +7,20 @@ export function EditTodoModal(props: any) {
   const { title, oldTodo, onSubmit, ...rest } = props;
   const [enteredName, setEnteredName] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
-  const [enteredIsComplete, setIsComplete] = useState(false);
+  const [enteredCompleted, setCompleted] = useState(false);
 
   useEffect(() => {
     if (oldTodo) {
       setEnteredName(oldTodo.name || "");
       setEnteredDescription(oldTodo.description || "");
-      setIsComplete(oldTodo.isCompleted || "");
+      setCompleted(oldTodo.completed || "");
     }
   }, [oldTodo.id]);
 
   const cleanUponSubmit = () => {
     setEnteredName("");
     setEnteredDescription("");
-    setIsComplete(false);
+    setCompleted(false);
   };
 
   return (
@@ -41,7 +41,7 @@ export function EditTodoModal(props: any) {
           className="todo-form"
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit(enteredName, enteredDescription, enteredIsComplete);
+            onSubmit(enteredName, enteredDescription, enteredCompleted);
             return cleanUponSubmit();
           }}
         >
@@ -72,8 +72,8 @@ export function EditTodoModal(props: any) {
             <Form.Check
               type="checkbox"
               label="Completed"
-              checked={enteredIsComplete}
-              onChange={(e: any) => setIsComplete(!enteredIsComplete)}
+              checked={enteredCompleted}
+              onChange={(e: any) => setCompleted(!enteredCompleted)}
             />
           </Form.Group>
         </Form>
