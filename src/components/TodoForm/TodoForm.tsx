@@ -58,7 +58,7 @@ export function TodoForm(props: any) {
                 type="checkbox"
                 label="Completed"
                 checked={enteredIsComplete}
-                onChange={(e: any) => setIsComplete(e.target.value)}
+                onChange={(e: any) => setIsComplete(!enteredIsComplete)}
               />
             </Form.Group>
 

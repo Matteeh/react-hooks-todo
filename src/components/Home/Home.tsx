@@ -10,12 +10,7 @@ const URL = "https://cosmostodosmicroservice.azurewebsites.net/api";
 
 export function Home(props: any) {
   const [todos, setTodos] = useState([] as any);
-  const [editTodo, setEditTodo] = useState({
-    id: "",
-    name: "",
-    description: "",
-    isComplete: false,
-  } as Todo);
+  const [editTodo, setEditTodo] = useState({} as Todo);
   const [deleteTodo, setDeleteTodo] = useState({
     id: "",
     name: "",
@@ -35,7 +30,7 @@ export function Home(props: any) {
     http.get(`${URL}/items`).then((newTodos: any[]) => setTodos([...newTodos]));
   };
 
-  const handleOnDeleteClick = (todo: Todo) => {
+  const handleDeleteClick = (todo: Todo) => {
     setdisplayConfirmationModal(true);
     setDeleteTodo(todo);
     console.log("table delete clicked", displayConfirmationModal);
@@ -68,13 +63,13 @@ export function Home(props: any) {
       });
   };
 
-  const handleOnEditClick = (todo: Todo) => {
+  const handleEditClick = (todo: Todo) => {
     setDisplayEditTodoModal(true);
     setEditTodo(todo);
     console.log("table edit clicked", todo);
   };
 
-  const handleOnEditTodoModalSubmit = (
+  const handleEditTodoModalSubmit = (
     enteredName: string,
     enteredDescription: string,
     enteredIsComplete: boolean
@@ -86,12 +81,14 @@ export function Home(props: any) {
         enteredIsComplete,
       })
       .then((todo) => {
+        setDisplayEditTodoModal(false);
+        setEditTodo({} as Todo);
         console.log(todo);
       });
   };
 
   /**
-   * Handle Sign In Submit
+   * Handle Todo form Submit
    * @param enteredEmail
    * @param enteredPassword
    */
@@ -117,8 +114,8 @@ export function Home(props: any) {
       <TodoForm onSubmit={handleTodoFormSubmit} />
       <br />
       <TodoTable
-        onEdit={handleOnEditClick}
-        onDelete={handleOnDeleteClick}
+        onEdit={handleEditClick}
+        onDelete={handleDeleteClick}
         todos={todos}
       />
       <ConfirmationModal
@@ -132,7 +129,7 @@ export function Home(props: any) {
         show={displayEditTodoModal}
         oldTodo={editTodo}
         onHide={() => setDisplayEditTodoModal(false)}
-        onSubmit={handleOnEditTodoModalSubmit}
+        onSubmit={handleEditTodoModalSubmit}
       />
     </div>
   );

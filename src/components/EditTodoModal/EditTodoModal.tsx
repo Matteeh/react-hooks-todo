@@ -11,9 +11,9 @@ export function EditTodoModal(props: any) {
 
   useEffect(() => {
     if (oldTodo) {
-      setEnteredName(oldTodo.name);
-      setEnteredDescription(oldTodo.description);
-      setIsComplete(oldTodo.isCompleted);
+      setEnteredName(oldTodo.name || "");
+      setEnteredDescription(oldTodo.description || "");
+      setIsComplete(oldTodo.isCompleted || "");
     }
   }, [oldTodo.id]);
 
@@ -29,6 +29,7 @@ export function EditTodoModal(props: any) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      animation={false}
     >
       <Modal.Header>
         <Modal.Title>Selected Todo to edit: {title}</Modal.Title>
@@ -36,7 +37,7 @@ export function EditTodoModal(props: any) {
 
       <Modal.Body>
         <Form
-          id="todoForm"
+          id="editTodoForm"
           className="todo-form"
           onSubmit={(e) => {
             e.preventDefault();
@@ -44,7 +45,7 @@ export function EditTodoModal(props: any) {
             return cleanUponSubmit();
           }}
         >
-          <Form.Group controlId="formBasicText">
+          <Form.Group controlId="editTodoFormBasicText">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
@@ -54,7 +55,7 @@ export function EditTodoModal(props: any) {
             />
           </Form.Group>
 
-          <Form.Group controlId="formBasicText">
+          <Form.Group controlId="editTodoFormBasicText">
             <Form.Label>Description</Form.Label>
             <Form.Control
               type="text"
@@ -65,14 +66,14 @@ export function EditTodoModal(props: any) {
           </Form.Group>
 
           <Form.Group
-            controlId="formBasicCheckbox"
+            controlId="editTodoFormBasicCheckbox"
             className="todo-form-check-grp"
           >
             <Form.Check
               type="checkbox"
               label="Completed"
               checked={enteredIsComplete}
-              onChange={(e: any) => setIsComplete(e.target.value)}
+              onChange={(e: any) => setIsComplete(!enteredIsComplete)}
             />
           </Form.Group>
         </Form>
@@ -82,7 +83,7 @@ export function EditTodoModal(props: any) {
         <Button onClick={props.onHide} variant="secondary">
           Close
         </Button>
-        <Button type="submit" form="todoForm" variant="primary">
+        <Button type="submit" form="editTodoForm" variant="primary">
           Submit edit
         </Button>
       </Modal.Footer>
