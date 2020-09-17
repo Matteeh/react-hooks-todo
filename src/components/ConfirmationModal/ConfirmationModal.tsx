@@ -8,6 +8,7 @@ export function ConfirmationModal(props: any) {
   return (
     <Modal
       {...rest}
+      animation={false}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered

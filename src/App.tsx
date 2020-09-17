@@ -6,12 +6,13 @@ import {
   Switch,
   useHistory,
 } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 import { http } from "./helpers/http";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import { Console } from "console";
+import Navigation from "./components/Navigation";
 const URL = "https://cosmosauthmicroservice.azurewebsites.net/api/auth"; //"http://localhost:5000/api/auth/sign-in";
 
 function App() {
@@ -20,11 +21,20 @@ function App() {
 
   useEffect(() => {
     if (window.localStorage.getItem("accessToken")) {
+      const token = window.localStorage.getItem("accessToken") || "";
+      const decoded: any = jwt_decode(token);
+      setEmailAndIdInLocalStorage(decoded.sub, decoded.Email);
+      console.log(decoded);
       setToken(true);
       history.push("/");
     }
     console.log("I RUN", tokenIsSet);
   });
+
+  const setEmailAndIdInLocalStorage = (userId: string, email: string) => {
+    window.localStorage.setItem("userId", userId);
+    window.localStorage.setItem("email", email);
+  };
 
   /**
    * Handle Sign In Submit
@@ -67,10 +77,16 @@ function App() {
       });
   };
 
+  const handleSignOut = () => {
+    window.localStorage.clear();
+    setToken(false);
+  };
+
   return (
     <div className="app-container">
       <Switch>
         <PrivateRoute authenticated={tokenIsSet} path="/" exact>
+          <Navigation onSignOut={handleSignOut} />
           <Home />
         </PrivateRoute>
         <Route path="/sign-in">

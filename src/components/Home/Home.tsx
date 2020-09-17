@@ -23,10 +23,10 @@ export function Home(props: any) {
   const [displayEditTodoModal, setDisplayEditTodoModal] = useState(false);
 
   useEffect(() => {
-    getTodos();
+    getUserTodos();
   }, []);
 
-  const getTodos = () => {
+  const getUserTodos = () => {
     http.get(`${URL}/items`).then((newTodos: any[]) => setTodos([...newTodos]));
   };
 
@@ -45,6 +45,7 @@ export function Home(props: any) {
         );
         setDeleteTodo({
           id: "",
+          userId: "",
           name: "",
           description: "",
           completed: false,
@@ -55,6 +56,7 @@ export function Home(props: any) {
         console.error(err);
         setDeleteTodo({
           id: "",
+          userId: "",
           name: "",
           description: "",
           completed: false,
@@ -78,6 +80,7 @@ export function Home(props: any) {
     http
       .put(`${URL}/items/${editTodo.id}`, {
         id: editTodo.id,
+        userId: window.localStorage.getItem("userId") || "",
         name: enteredName,
         description: enteredDescription,
         completed: enteredIsComplete,
@@ -101,9 +104,10 @@ export function Home(props: any) {
   ) => {
     http
       .post(`${URL}/items`, {
+        userId: window.localStorage.getItem("userId") || "",
         name: enteredName,
         description: enteredDescription,
-        enteredIsComplete,
+        completed: enteredIsComplete,
       })
       .then((todo) => {
         setTodos((ts: any[]) => [...ts, todo]);

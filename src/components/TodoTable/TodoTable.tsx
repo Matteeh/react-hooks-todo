@@ -25,7 +25,10 @@ export function TodoTable(props: any) {
           <td>{todo.name}</td>
           <td>{todo.description}</td>
           <td>
-            <FontAwesomeIcon icon={todo.completed ? faCheck : faUserClock} />
+            <FontAwesomeIcon
+              icon={todo.completed ? faCheck : faUserClock}
+              color={todo.completed ? "#28a745" : "orange"}
+            />
           </td>
           <td>
             <Button onClick={() => onEdit(todo)}>Edit</Button>
