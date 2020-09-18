@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# About
+
+This is a demo project to introduce myself to react hooks and Azure services. This is just a simple todo app but the main goal was to get used to react hooks.
+The backend is built with .Net and is hosted on Azure app services. The backend consits of three microservices; Auth:(https://github.com/Matteeh/.Net-authorization-microservice), Users:(https://github.com/Matteeh/.Net-users-microservice) and Todos(https://github.com/Matteeh/.Net-todo-microservice).
+The database in use is Azure CosmosDB.
+
 ## Available Scripts
 
 In the project directory, you can run:
